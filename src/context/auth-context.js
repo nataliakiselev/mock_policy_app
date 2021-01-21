@@ -1,5 +1,4 @@
-import React, { createContext, useState, useCallback } from 'react';
-// import * as auth from '../auth-provider';
+import React, { createContext, useState, useCallback, useEffect } from 'react';
 
 export const AuthContext = createContext({
   token: null,
@@ -25,6 +24,12 @@ export const AuthProvider = props => {
     localStorage.removeItem('token');
     setToken(null);
   }, [setToken]);
+
+  // useEffect(()=>{
+  //   if(token === null){
+
+  //   }
+  // })
 
   return (
     <AuthContext.Provider
