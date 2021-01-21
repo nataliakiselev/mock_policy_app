@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { PolicyContext } from '../context/policy-context';
@@ -19,8 +19,6 @@ const useStyles = makeStyles(theme => ({
 export default function Policydetails() {
   const classes = useStyles();
   const { loading, error, policyDetails } = useContext(PolicyContext);
-
-  console.log('policy', policyDetails);
 
   return (
     <div className={classes.paper}>

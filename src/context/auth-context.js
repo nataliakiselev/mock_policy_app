@@ -22,8 +22,8 @@ export const AuthProvider = props => {
   );
 
   const logout = useCallback(() => {
+    localStorage.removeItem('token');
     setToken(null);
-    localStorage.removeItem('access_token');
   }, [setToken]);
 
   return (

@@ -33,11 +33,8 @@ export const PolicyDetailsProvider = props => {
   };
 
   const fetchPolicyDetails = useCallback(async () => {
-    if (loading || loaded || error) {
-      return;
-    } else {
-      setLoading(true);
-    }
+    setLoading(true);
+
     try {
       const response = await fetch(POLICY_URL, {
         // method: "post",
@@ -73,10 +70,16 @@ export const PolicyDetailsProvider = props => {
 
   useEffect(() => {
     console.log('inuseeffect');
-    //if (!loaded) {
-    fetchPolicyDetails();
-    //}
-  }, [policyDetails, fetchPolicyDetails, token]);
+    if (token && !loaded) {
+      console.log('fetching policy');
+      console.log(token, 'token in fetch');
+      fetchPolicyDetails();
+    }
+    if (!token) {
+      setLoaded(false);
+      console.log('loaded set to false');
+    }
+  }, [policyDetails, fetchPolicyDetails, loaded, token]);
 
   return (
     <PolicyContext.Provider
