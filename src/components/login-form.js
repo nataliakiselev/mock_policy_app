@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AuthContext } from '../context/auth-context';
 import PageFrame from './page-frame';
 import { ErrorMessage } from './lib';
-
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -16,17 +15,20 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   header: {
-    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '60%',
+    },
   },
   form: {
-    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '60%',
+    },
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
 export default function LoginForm({ onSubmit }) {
   const classes = useStyles();
   const { error } = useContext(AuthContext);
@@ -42,13 +44,11 @@ export default function LoginForm({ onSubmit }) {
     };
     onSubmit(data);
   }
-
   const handleChange = event => {
     const { value } = event.target;
-    const isValid = value.length > 5 && value.length < 11;
-    setInvalid(isValid ? null : 'Must be 6 to 10 charachters');
+    const isValid = value.length > 5 && value.length < 30;
+    setInvalid(isValid ? null : 'Must be 6 to 30 characters');
   };
-
   return (
     <PageFrame>
       <div className={classes.paper}>
@@ -84,7 +84,6 @@ export default function LoginForm({ onSubmit }) {
             onChange={handleChange}
             helperText={invalid}
           />
-
           <Button
             type="submit"
             fullWidth
@@ -96,8 +95,8 @@ export default function LoginForm({ onSubmit }) {
             Sign In
           </Button>
         </form>
+        {error && <ErrorMessage error={error} />}
       </div>
-      {error && <ErrorMessage error={error} />}
     </PageFrame>
   );
 }

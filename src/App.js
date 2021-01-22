@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { AuthContext } from './context/auth-context';
+
 import AuthenticatedApp from './authenticated-app';
-import LoginPage from './pages/login-page';
+import LoginPage from './login';
 
 function App() {
   const { token } = useContext(AuthContext);

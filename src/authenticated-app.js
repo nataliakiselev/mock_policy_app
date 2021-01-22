@@ -5,8 +5,8 @@ import { Button } from '@material-ui/core';
 import { AuthContext } from './context/auth-context';
 import PolicyDetails from './pages/policy-details';
 import NotFound from './pages/not-found';
-import { CircularProgress } from '@material-ui/core';
 import PageFrame from './components/page-frame';
+import { LoadingSpinner } from './components/lib';
 
 function AuthenticatedApp() {
   const { logout } = useContext(AuthContext);
@@ -15,7 +15,7 @@ function AuthenticatedApp() {
       <Button variant="contained" color="primary" onClick={logout}>
         Logout
       </Button>
-      <ErrorBoundary fallback={<CircularProgress />}>
+      <ErrorBoundary fallback={<LoadingSpinner />}>
         <AppRoutes />
       </ErrorBoundary>
     </PageFrame>

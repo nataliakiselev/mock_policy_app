@@ -7,40 +7,38 @@ import React, {
 } from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { AuthContext } from './auth-context';
-
 export const PolicyContext = createContext({
   fetchPolicy: () => {},
   loaded: false,
   loading: false,
   error: null,
-  policyDetails: {},
+  policyDetails: null,
 });
-
 export const PolicyDetailsProvider = props => {
-  const [policyDetails, setPolicyDetails] = useState({});
+  const [policyDetails, setPolicyDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
   const { logout, token } = useContext(AuthContext);
   const { addToast } = useToasts();
-
   const POLICY_URL = 'https://api.bybits.co.uk/policys/details';
 
-  const headers = {
-    environment: 'mock',
-    'Content-type': 'application/json',
-    Authorization: `Bearer ${token}`,
-  };
-
   const fetchPolicyDetails = useCallback(async () => {
-    setLoading(true);
+    if (loaded) {
+      return;
+    } else {
+      setLoading(true);
+    }
 
+    const headers = {
+      environment: 'mock',
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
     try {
       const response = await fetch(POLICY_URL, {
-        // method: "post",
         headers,
       });
-
       console.log('response', response);
       if (response.ok) {
         const data = await response.json();
@@ -64,23 +62,17 @@ export const PolicyDetailsProvider = props => {
     } finally {
       setLoading(false);
       setLoaded(true);
-      console.log('loaded set', loaded);
     }
-  });
+  }, [addToast, loaded, logout, token]);
 
   useEffect(() => {
-    console.log('inuseeffect');
     if (token && !loaded) {
-      console.log('fetching policy');
-      console.log(token, 'token in fetch');
       fetchPolicyDetails();
     }
     if (!token) {
       setLoaded(false);
-      console.log('loaded set to false');
     }
   }, [policyDetails, fetchPolicyDetails, loaded, token]);
-
   return (
     <PolicyContext.Provider
       value={{

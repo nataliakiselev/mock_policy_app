@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useState, useCallback } from 'react';
 
 export const AuthContext = createContext({
   token: null,
@@ -12,9 +12,7 @@ export const AuthProvider = props => {
 
   const login = useCallback(
     token => {
-      console.log('token', token);
       localStorage.setItem('token', token);
-      console.log('tokenstored');
       setToken(token);
     },
     [setToken],
@@ -24,12 +22,6 @@ export const AuthProvider = props => {
     localStorage.removeItem('token');
     setToken(null);
   }, [setToken]);
-
-  // useEffect(()=>{
-  //   if(token === null){
-
-  //   }
-  // })
 
   return (
     <AuthContext.Provider

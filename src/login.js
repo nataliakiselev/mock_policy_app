@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useToasts } from 'react-toast-notifications';
-import { AuthContext } from '../context/auth-context';
-import LoginForm from '../components/login-form';
+import { AuthContext } from './context/auth-context';
+import LoginForm from './components/login-form';
 
 function LoginPage() {
   const { login } = useContext(AuthContext);
