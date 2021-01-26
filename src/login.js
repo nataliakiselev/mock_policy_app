@@ -42,7 +42,7 @@ function LoginPage() {
       });
     }
   }
-  return <LoginForm onSubmit={auth} />;
+  return <LoginForm authSubmit={auth} />;
 }
 
 export default LoginPage;

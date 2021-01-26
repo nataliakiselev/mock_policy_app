@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Typography, Button, TextField, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useForm, Controller } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers/yup';
-// import { useForm, Controller } from 'react-hook-form';
 // import * as yup from 'yup';
 import { AuthContext } from '../context/auth-context';
 import PageFrame from './page-frame';
 import { ErrorMessage } from './lib';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -29,26 +30,21 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-export default function LoginForm({ onSubmit }) {
+export default function LoginForm({ authSubmit }) {
   const classes = useStyles();
   const { error } = useContext(AuthContext);
-  const [invalid, setInvalid] = useState(null);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const { username, password } = event.target.elements;
+  const { handleSubmit, control, errors: fieldsErrors } = useForm();
+
+  const onSubmit = creds => {
+    console.log(creds);
     const data = {
-      username: username.value,
-      password: password.value,
+      ...creds,
       type: 'USER_PASSWORD_AUTH',
     };
-    onSubmit(data);
-  }
-  const handleChange = event => {
-    const { value } = event.target;
-    const isValid = value.length > 5 && value.length < 30;
-    setInvalid(isValid ? null : 'Must be 6 to 30 characters');
+    authSubmit(data);
   };
+
   return (
     <PageFrame>
       <div className={classes.paper}>
@@ -57,32 +53,59 @@ export default function LoginForm({ onSubmit }) {
             Sign in
           </Typography>
         </Box>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <TextField
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Controller
+            as={
+              <TextField
+                id="username"
+                label="Username"
+                helperText="must be 6 to 20 characters"
+                error={Boolean(fieldsErrors.username)}
+              />
+            }
             variant="outlined"
             margin="normal"
-            required
+            control={control}
+            defaultValue=""
             fullWidth
-            id="username"
-            label="Username"
             name="username"
             autoFocus
             autoComplete="username"
-            onChange={handleChange}
-            helperText={invalid}
+            rules={{
+              required: true,
+
+              minLength: 6,
+              maxLength: 30,
+            }}
           />
-          <TextField
+
+          <Controller
+            name="password"
+            as={
+              <TextField
+                helperText="must be 8 to 20 characters"
+                id="password"
+                label="Password"
+                error={Boolean(fieldsErrors.password)}
+              />
+            }
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
             type="password"
-            id="password"
             autoComplete="current-password"
-            onChange={handleChange}
-            helperText={invalid}
+            control={control}
+            defaultValue=""
+            rules={{
+              required: 'required',
+              minLength: 8,
+              maxLength: 20,
+            }}
           />
           <Button
             type="submit"
@@ -90,7 +113,6 @@ export default function LoginForm({ onSubmit }) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={Boolean(invalid)}
           >
             Sign In
           </Button>
