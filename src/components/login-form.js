@@ -63,21 +63,19 @@ export default function LoginForm({ authSubmit }) {
               <TextField
                 id="username"
                 label="Username"
-                helperText="must be 6 to 20 characters"
+                helperText="Must be 6 to 20 characters"
                 error={Boolean(fieldsErrors.username)}
               />
             }
             variant="outlined"
             margin="normal"
             control={control}
-            defaultValue=""
             fullWidth
-            name="username"
-            autoFocus
             autoComplete="username"
+            defaultValue=""
+            name="username"
             rules={{
               required: true,
-
               minLength: 6,
               maxLength: 30,
             }}
@@ -87,7 +85,7 @@ export default function LoginForm({ authSubmit }) {
             name="password"
             as={
               <TextField
-                helperText="must be 8 to 20 characters"
+                helperText="Must be 8 to 20 characters"
                 id="password"
                 label="Password"
                 error={Boolean(fieldsErrors.password)}
@@ -95,12 +93,11 @@ export default function LoginForm({ authSubmit }) {
             }
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             type="password"
             autoComplete="current-password"
-            control={control}
             defaultValue=""
+            control={control}
             rules={{
               required: 'required',
               minLength: 8,
