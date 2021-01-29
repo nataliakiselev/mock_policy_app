@@ -15,8 +15,7 @@ function LoginPage() {
 
   async function auth(data) {
     try {
-      console.log(data, 'data');
-      console.log(JSON.stringify(data), 'body');
+      // console.log(data, 'data');
       const response = await fetch(AUTH_URL, {
         method: 'post',
         headers,
@@ -25,7 +24,7 @@ function LoginPage() {
 
       if (response.ok) {
         const { access_token } = await response.json();
-        console.log('access_token', access_token);
+        // console.log('access_token', access_token);
         if (!access_token) {
           throw new Error('No access token in response');
         } else {

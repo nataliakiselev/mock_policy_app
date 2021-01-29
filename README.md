@@ -1,11 +1,7 @@
 ## By Miles technical challenge -Policy API
 
-I chose to use React.js for this project, with use of Router, hooks and React context (as state management solution), and Material-UI for CSS. Although it is a simple app at the moment, I tried to plan it with the possibility of future potential development, with extensibility, separating concerns and reusability in mind.
-<<<<<<< HEAD
-Building it took me about a day long, with breaks. Testing has not been completed yet.
-=======
-Building it took me about a day long, with breaks. Testing has not been completed yet, setup in process.
->>>>>>> 50245262e8c33baef4e1be870a6e6f09d1249b71
+My solution to the technical challenge using React, with Router, hooks and React context (as state management solution), and Material-UI for CSS. Although the task objective was a simple app, I tried to plan it with possible future potential development in mind: ensuring extensibility, separating concerns and reusability.
+Testing has not been completed yet, setup in process.
 
 # Getting Started with Create React App
 
