@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import { Typography, Button, TextField, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm, Controller } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from 'yup';
 import { AuthContext } from '../context/auth-context';
 import PageFrame from './page-frame';
 import { ErrorMessage } from './lib';
@@ -37,7 +35,6 @@ export default function LoginForm({ authSubmit }) {
   const { handleSubmit, control, errors: fieldsErrors } = useForm();
 
   const onSubmit = creds => {
-    console.log(creds);
     const data = {
       ...creds,
       type: 'USER_PASSWORD_AUTH',

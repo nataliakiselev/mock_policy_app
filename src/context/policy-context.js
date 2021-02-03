@@ -39,10 +39,10 @@ export const PolicyDetailsProvider = props => {
       const response = await fetch(POLICY_URL, {
         headers,
       });
-      console.log('response', response);
+
       if (response.ok) {
         const data = await response.json();
-        console.log('data', data);
+
         setPolicyDetails(data);
       } else {
         if (response.status === 401) {
