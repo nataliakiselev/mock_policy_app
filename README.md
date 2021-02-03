@@ -1,7 +1,9 @@
-## By Miles technical challenge -Policy API
+## technical challenge -Policy API
 
-My solution to the technical challenge using React, with Router, hooks and React context (as state management solution), React hook form for form handling, and Material-UI for CSS. Although the task objective was a simple app, I tried to plan it with possible future potential development in mind: ensuring extensibility, separating concerns and reusability.
-Testing has not been completed yet, setup in process.
+My solution to the technical challenge using React, with Router, hooks and React context (as state management solution), React hook form for form handling, and Material-UI for CSS.
+The task: Using given mock Policy API endpoints, to create a simple web application with a login screen which takes a username and password. Once authorised, it will navigate the user to another page which will display policy details. A wireframe and user story were provided as a guide.
+Although the task objective was a simple app, I tried to plan it with the possibility of future development in mind: ensuring extensibility, separating concerns and reusability.
+Testing has not been completed yet.
 
 ## Getting Started with Create React App
 
